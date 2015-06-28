@@ -1,8 +1,211 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Helvetica, Lucida Grande", Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+/** --------- Custom ------- **/
+
+
+/** ------ Button Farbe ------- **/
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 20px; /* Button radius geändert */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn-primary {
+  color: #8D9091;
+  background-color: #A2D5CE;
+  border-color: #A2D5CE;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: white;
+  background-color:#8D9091;
+  border-color: #8D9091;
+}
+
+/** ---- JUMBOTRON ------ **/
+
+.jumbotron {
+  padding: 30px 15px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: white; /* angepasste Hintergrundfarbe */
+
+}
+.jumbotron h1,
+.jumbotron .h1 {
+  color: inherit;
+}
+.jumbotron p {
+  margin-bottom: 15px;
+  font-size: 18px; /* Schriftgröße angepasst */
+  font-weight: 200;
+  color: #8D9091; /* angepasste Schriftfarbe */
+}
+.jumbotron > hr {
+  border-top-color: #7fc5bb;
+}
+.container .jumbotron,
+.container-fluid .jumbotron {
+  border-radius: 20px; /* angepasster Radius */   
+  border-style: solid; /* hinzugefügter Wert */
+  border-color: #8D9091; /* hinzugefügte Farbe */
+  border-width: 1px; /* hunzugefügter Wert */
+
+
+}
+.jumbotron .container {
+  max-width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .jumbotron {
+    padding: 48px 0;
+  }
+  .container .jumbotron,
+  .container-fluid .jumbotron {
+    padding-left: 60px;
+    padding-right: 60px;
+
+  }
+  .jumbotron h1,
+  .jumbotron .h1 {
+    font-size: 63px;
+  }
+}
+
+/** ----- FORM CONTROL ----- **/
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #8D9091; /* Farbe angepasst (Grau) */
+  border-radius: 20px; /* Wert für Radius geendert (20px) */
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control:focus {
+  border-color: #A2D5CE; /* Farbe angepasst (Mint) */
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(162, 213, 206, 0.6); /* zweiter rgba Wert angepasst */
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(162, 213, 206, 0.6); /* zweiter rgba Wert angepasst */
+}
+
+/** ------ THUMBNAILS ------- **/
+
+.thumbnail {
+  display: block;
+  padding: 4px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #FFFFFF;
+  border: 1px solid #A2D5CE; /* Farbe angepasste (mint) */
+  border-radius: 4px;
+  -webkit-transition: border 0.2s ease-in-out;
+  -o-transition: border 0.2s ease-in-out;
+  transition: border 0.2s ease-in-out;
+}
+.thumbnail > img,
+.thumbnail a > img {
+  margin-left: auto;
+  margin-right: auto;
+}
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
+  border-color: #8D9091; /* Farbe angepasste (grau) */
+}
+.thumbnail .caption {
+  padding: 9px;
+  color: #333333;
+}
+
+/** --------- MODAL -------- **/
+
+
+/** ------- IMAGE GALLERY ------ **/
+
+ul {
+  padding:0 0 0 0;
+  margin:0 0 0 0;
+}
+ul li {
+  list-style:none;
+  margin-bottom:25px;
+}
+ul li img {
+  cursor: pointer;
+}
+.modal-body {
+  padding:5px !important;
+}
+.modal-content {
+  border-radius:0;
+}
+.modal-dialog img {
+  text-align:center;
+  margin:0 auto;
+}
+.controls{
+  width:50px;
+  display:block;
+  font-size:11px;
+  padding-top:8px;
+  font-weight:bold;
+}
+.next {
+  float:right;
+  text-align:right;
+}
+/*override modal for demo only*/
+.modal-dialog {
+  max-width:500px;
+  padding-top: 90px;
+}
+@media screen and (min-width: 768px){
+  .modal-dialog {
+    width:500px;
+    padding-top: 90px;
+  }
+}
+@media screen and (max-width:1500px){
+  #ads {
+    display:none;
+  }
 }
