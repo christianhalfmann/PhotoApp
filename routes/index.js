@@ -9,7 +9,13 @@ router.get('/', function(req, res, next) {
 /* POST request to index.html */
 router.post('/', function(req, res, next) {
     // TODO get session json
-    res.json(req.body.sessionID);
+    var id = req.body.sessionID;
+    var dummyData = {
+        lastname: 'Halfmann',
+        firstname: 'Christian'
+    };
+
+    res.json(dummyData);
 });
 
 /* GET start page. */
