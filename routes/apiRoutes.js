@@ -6,7 +6,7 @@ var serverData = require('../config').dataServer;
 // SESSION ROUTES
 
 /* GET request to /api/sessions to retrieve all sessions. */
-router.get('/sessions', function(req, res, next) {
+router.get('/sessions', function getSessions(req, res, next) {
     // create options object for the following request
     var options = {
         host: serverData.url,
@@ -27,7 +27,7 @@ router.get('/sessions', function(req, res, next) {
     }).end();
 });
 
-router.get('/sessions/:id', function(req, res, next) {
+router.get('/sessions/:id', function getSessionById(req, res, next) {
     var sessionId = req.params.id;
     // create options object for the following request
     var options = {
