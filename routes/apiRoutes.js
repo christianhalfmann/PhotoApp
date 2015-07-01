@@ -9,7 +9,7 @@ var serverData = require('../config').dataServer;
 router.get('/sessions', function getSessions(req, res, next) {
     // create options object for the following request
     var options = {
-        host: serverData.url,
+        host: serverData.host,
         port: serverData.port,
         path: '/api/sessions',
         method: 'GET',
@@ -31,7 +31,7 @@ router.get('/sessions/:id', function getSessionById(req, res, next) {
     var sessionId = req.params.id;
     // create options object for the following request
     var options = {
-        host: serverData.url,
+        host: serverData.host,
         port: serverData.port,
         path: '/api/sessions/' + sessionId,
         method: 'GET',
