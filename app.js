@@ -38,3 +38,7 @@ var server = http.createServer(app);
 server.listen(port, function() {
     console.log('> Server listening on port: ' + port);
 });
+
+process.on('uncaughtException', function (err) {
+    console.log(err);
+});

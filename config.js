@@ -5,7 +5,7 @@
  * @version 01 JUL 2015
  */
 module.exports.dataServer = {
-    url: 'lyra.et-inf.fho-emden.de',
+    url: 'http://www.dev-athyrion.de',
     port: 60159
 };
 
