@@ -1,13 +1,10 @@
 (function() {
     $(document).ready(function() {
         $('#buttonRequestSessionID').on('click', requestSession);
-
         $('form').on('submit', function(evt){
             evt.preventDefault();
-
         });
     });
-
 
     function requestSession(evt) {
         var id = $('#inputSessionId').val();
@@ -33,9 +30,7 @@
     }
 
     function appendSessionView(sessionData) {
-
         var imagesHTML = '';
-
         sessionData.images.forEach(function(image) {
             var link = '<a href="/api/images/' + image + '" class="thumbnail">';
             link += '<img src="/api/thumbnails/'
@@ -43,6 +38,7 @@
             link += '</a>';
             imagesHTML += link;
         });
+
         var name = sessionData.client.firstname + ' '
             + sessionData.client.lastname;
 
@@ -53,6 +49,5 @@
     function hideSessionInput() {
         $('#formSessionId').hide();
     }
-
 })();
 
