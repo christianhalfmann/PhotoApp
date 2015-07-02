@@ -64,8 +64,6 @@ router.get('/thumbnails/:id', function(req, res, next) {
 
     // create and send request
     http.request(options, function(response) {
-        //console.log(response.headers);
-        var contentLength = parseInt(response.headers['content-length']);
         var contentType = response.headers['content-type'];
         var tmpData = '';
         response.pipe(res);
@@ -97,19 +95,19 @@ router.get('/images/:id', function(req, res, next) {
 
     // create and send request
     http.request(options, function(response) {
-        console.log(response.headers);
-        var contentLength = parseInt(response.headers['content-length']);
         var contentType = response.headers['content-type'];
-        var tmpImage = new Buffer(contentLength);
+        var tmpData = '';
+        response.pipe(res);
+
         // react to the server's response...
         response.on('data', function(data) {
-            // ... by writing the responded data to the buffer
-            tmpImage.write(data);
+            // ... by passing writing data to the tmpImage variable
+            tmpData += data;
         });
 
         response.on('end', function() {
             res.set('Content-Type', contentType);
-            res.send(tmpImage);
+            res.end(tmpData, 'binary');
         })
     }).end();
 });

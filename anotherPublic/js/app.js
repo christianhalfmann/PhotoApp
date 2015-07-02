@@ -1,6 +1,11 @@
 (function() {
     $(document).ready(function() {
         $('#buttonRequestSessionID').on('click', requestSession);
+
+        $('form').on('submit', function(evt){
+            evt.preventDefault();
+
+        });
     });
 
 
@@ -10,7 +15,7 @@
             $('#eventText').html('<img src="img/loading.gif"> loading...');
             var jqxhr = $.ajax('/api/sessions/' + id)
                 .done(function() {
-                    $('#eventText').html('Session ' + id + ' requested');
+                    hideSessionInput();
                 })
                 .success(function(data, textStatus) {
                     //console.log(data);
@@ -32,15 +37,21 @@
         var imagesHTML = '';
 
         sessionData.images.forEach(function(image) {
-            imagesHTML += '<img src=/api/thumbnails/'
-                + image + ' width="200" height="200" alt="' + image + '" />'
+            var link = '<a href="/api/images/' + image + '" class="thumbnail">';
+            link += '<img src="/api/thumbnails/'
+                + image + '" class="img-responsive" width="200" height="200" alt="' + image + '" />';
+            link += '</a>';
+            imagesHTML += link;
         });
+        var name = sessionData.client.firstname + ' '
+            + sessionData.client.lastname;
 
-        $('#sessionData').html(
-            '<span>' + sessionData.client.firstname + '&nbsp;</span>' +
-            '<span>' + sessionData.client.lastname + '</span>' +
-            imagesHTML
-        );
+        $('#greeterHeading').html('Hallo, ' + name);
+        $('#sessionData').html(imagesHTML);
+    }
+
+    function hideSessionInput() {
+        $('#formSessionId').hide();
     }
 
 })();
