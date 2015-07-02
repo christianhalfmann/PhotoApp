@@ -5,8 +5,8 @@
  * @version 01 JUL 2015
  */
 module.exports.dataServer = {
-    host: 'www.dev-athyrion.de',
-    port: 60159
+    host: 'img.dev-athyrion.de',
+    port: 80
 };
 
 module.exports.testServer = {

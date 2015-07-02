@@ -51,9 +51,67 @@ router.get('/sessions/:id', function getSessionById(req, res, next) {
 
 // IMAGE ROUTES
 
+router.get('/thumbnails/:id', function(req, res, next) {
+    var thumbId = req.params.id;
+    // create options object for the following request
+    var options = {
+        host: serverData.host,
+        port: serverData.port,
+        path: '/api/thumbnails/' + thumbId,
+        method: 'GET',
+        accept: 'image/*'
+    };
+
+    // create and send request
+    http.request(options, function(response) {
+        //console.log(response.headers);
+        var contentLength = parseInt(response.headers['content-length']);
+        var contentType = response.headers['content-type'];
+        var tmpData = '';
+        response.pipe(res);
+
+        // react to the server's response...
+        response.on('data', function(data) {
+            // ... by passing writing data to the tmpImage variable
+            tmpData += data;
+        });
+
+        response.on('end', function() {
+            res.set('Content-Type', contentType);
+            res.end(tmpData, 'binary');
+        })
+    }).end();
+});
+
 /* GET request to /api/images/:id. */
 router.get('/images/:id', function(req, res, next) {
-    //
+    var thumbId = req.params.id;
+    // create options object for the following request
+    var options = {
+        host: serverData.host,
+        port: serverData.port,
+        path: '/api/images/' + thumbId,
+        method: 'GET',
+        accept: 'image/*'
+    };
+
+    // create and send request
+    http.request(options, function(response) {
+        console.log(response.headers);
+        var contentLength = parseInt(response.headers['content-length']);
+        var contentType = response.headers['content-type'];
+        var tmpImage = new Buffer(contentLength);
+        // react to the server's response...
+        response.on('data', function(data) {
+            // ... by writing the responded data to the buffer
+            tmpImage.write(data);
+        });
+
+        response.on('end', function() {
+            res.set('Content-Type', contentType);
+            res.send(tmpImage);
+        })
+    }).end();
 });
 
 module.exports = router;
