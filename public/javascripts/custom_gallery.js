@@ -11,3 +11,6 @@ $('#borderless-checkbox').on('change', function () {
 $('#fullscreen-checkbox').on('change', function () {
     $('#blueimp-gallery').data('fullScreen', $(this).is(':checked'));
 });
+
+
+/** Push vergessen **/
