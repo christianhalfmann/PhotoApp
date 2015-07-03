@@ -4,59 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <title>IMG-App</title>
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
     <!-- Custom Style -->
     <link rel="stylesheet" href="stylesheets/style.css">
+    <!-- blueimp-Gallery -->
+    <link rel="stylesheet" href="stylesheets/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="stylesheets/bootstrap-image-gallery.css">
+
 
 </head>
 
 <body>
-
-    <div class="container">
-
-        <br />
-
-        <!-- Logo -->
-        <div class="row">
-            <div class="col-xs-0 col-sm-0 col-md-3"></div>
-            <div class="col-xs-8 col-sm-6 col-md-4">
-                <img src="images/PM_Logo_Standard_grid.png" alt="Logo" class="img-responsive"> <br /><br />
-            </div>
-            <div class="col-xs-4 col-sm-6 col-md-5"></div>
+<div class="container">
+    <br />
+    <!-- Logo -->
+    <div class="row">
+        <div class="col-xs-0 col-sm-0 col-md-3"></div>
+        <div class="col-xs-8 col-sm-6 col-md-4">
+            <img src="images/PM_Logo_Standard_grid.png" alt="Logo" class="img-responsive"> <br /><br />
         </div>
+    </div>
 
-        <!-- Begrüßung -->
+    <div id="test"></div>
+
+    <!-- Page 1 - Authentication-->
+    <div id="page1">
         <div class="row">
             <div class="col-xs-0 col-sm-0 col-md-3"></div>
             <div class="col-xs-12 col-sm-12 col-md-6">
                 <div class="jumbotron">
-                    <p> Willkommen bei Picture Moments! <br /> Hier hast Du die Möglichkeit Bilder Deiner Foto-Session Online zu betrachten. Bitte
+                    <p id="start"> Willkommen bei Picture Moments! <br /> Hier hast Du die Möglichkeit Bilder Deiner Foto-Session Online zu betrachten. Bitte
                         gib dafür Deine Session-ID ein.</p>
-                    <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
+                    </p>
                 </div>
-               </div>
-            <div class="col-xs-0 col-sm-0 col-md-3"></div>
-        </div>
 
-        <!-- Authentifizierung -->
-        <div class="row">
-            <div class="col-xs-0 col-sm-0 col-md-3"></div>
-            <div class="col-xs-12 col-sm-12 col-md-6">
-                <form method="post" action="/">
-                    <!--
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                    </div>
-                    -->
+                <!-- Formular + Button -->
+                <form id="form" method="post" action="/">
                     <div class="form-group">
                         <label for="exampleInputPassword1"></label>
                         <input type="text"
@@ -65,30 +53,189 @@
                                name="sessionID"
                                placeholder="Session-ID eingeben">
                     </div>
-                    <!--
-                    <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
-                        <p class="help-block">Example block-level help text here.</p>
+                    <div id="ok_button">
+                        <button id="ok" type="submit" class="btn btn-primary">OK</button>
                     </div>
-                    -->
-                    <!--
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Check me out
-                        </label>
-                    </div>
-                    -->
-                    <button type="submit" class="btn btn-primary">OK</button>
                 </form>
             </div>
+        </div>
+    </div> <!-- /page1 -->
+
+    <!-- Page 2 - Welcome -->
+    <div id="page2">
+        <div class="row">
+            <div class="col-xs-0 col-sm-0 col-md-3"></div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="jumbotron">
+                    <p id="welcome"> Hallo <p1 id="name">Name</p1>!<br />Die Bilder Deiner Session liegen hier bereit. Du kannst Dich durch alle Bilder durchklicken oder sie
+                        als Slideshow betrachten. Viel Spaß!
+                    </p>
+                </div>
+                <!-- Button -->
+                <div id="button_welcome">
+                    <a id="pictures" class="btn btn-primary btn-lg btn-block" role="button"><strong>Bilder</strong></a>
+                    <a id="videos" class="btn btn-primary btn-lg btn-block" role="button"><strong>Slideshow</strong></a>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /page2 -->
+
+    <!-- Page 3 - Gallery -->
+    <div id="page3">
+        <div class="row">
             <div class="col-xs-0 col-sm-0 col-md-3"></div>
 
-        </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
 
-    </div> <!-- /container -->
-    <script src="libs/jquery/dist/jquery.min.js"></script>
-    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary btn-lg">
+                        <i class="glyphicon glyphicon-new-window"></i>
+                        <input id="borderless-checkbox" type="checkbox"> Borderless
+                    </label>
+                    <label class="btn btn-primary btn-lg">
+                        <i class="glyphicon glyphicon-fullscreen"></i>
+                        <input id="fullscreen-checkbox" type="checkbox"> Fullscreen
+                    </label>
+                </div>
+
+
+                <div id="links"></div>
+
+
+                <div class="row">
+                    <br />
+                    <div class="col-xs-6 col-md-3">
+                        <a href="images/hi_res/LSC_0200.jpg" title="Table Soccer" class="thumbnail" data-gallery>
+                            <img src="images/thumbnails/thumb_LSC_0200.jpg" width="" height ="" alt="Table Soccer">
+                        </a>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <a href="images/hi_res/LSC_0202.jpg" title="Emergancy Exit #1" class="thumbnail" data-gallery>
+                            <img src="images/thumbnails/thumb_LSC_0202.jpg" width="" height = "" alt="Emergancy Exit #1">
+                        </a>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <a href="images/hi_res/LSC_0206.jpg" title="Emergancy Exit #2" class="thumbnail" data-gallery>
+                            <img src="images/thumbnails/thumb_LSC_0206.jpg" class="portrait" width="" height = "" alt="Emergancy Exit #2">
+                        </a>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <a href="images/hi_res/LSC_0220.jpg" title="Pull" class="thumbnail" data-gallery>
+                            <img src="images/thumbnails/thumb_LSC_0220.jpg" width="" height = "" alt="Pull">
+                        </a>
+                    </div>
+
+                </div>
+
+                <!--- Button -->
+                <br />
+                <div id="back_button_page3"
+                <a class="btn btn-primary" role="button">
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </div>
+            </div>
+        </div>
+    </div> <!-- /page3 -->
+
+    <!-- Page 4 - Video -->
+    <div id="page4">
+        <div class="row">
+            <div class="col-xs-0 col-sm-0 col-md-3"></div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <!-- <iframe class="embed-responsive-item" src="clips/In-Studio.mp4"></iframe>-->
+                </div>
+                <br />
+                <div id="back_button_page4"
+                    <a class="btn btn-primary" role="button">
+                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /page4 -->
+
+    <!-- Page 5 - Error -->
+    <div id="page5">
+        <div id="page1">
+            <div class="row">
+                <div class="col-xs-0 col-sm-0 col-md-3"></div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="jumbotron">
+                        <p id="error"> <p>Die eingegebene Session ID ist nicht vergeben. Bitte kontrolliere Deine Eingabe oder versuche es zu einem späteren Zeitpunkt
+                        noch einmal.</p>
+                        </p>
+                    </div>
+
+                    <!-- Formular + Button -->
+                    <form id="form" method="post" action="/">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"></label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="exampleInputPassword1"
+                                   name="sessionID"
+                                   placeholder="Session-ID eingeben">
+                        </div>
+                        <div id="ok_button">
+                            <button type="submit" class="btn btn-primary">OK</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> <!-- page5 -->
+
+    <!-- Modal -->
+    <div id="blueimp-gallery" class="blueimp-gallery">
+        <!-- The container for the modal slides -->
+        <div class="slides"></div>
+        <!-- Controls for the borderless lightbox -->
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+        <!-- The modal dialog, which will be used to wrap the lightbox content -->
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body next"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left prev">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Previous
+                        </button>
+                        <button type="button" class="btn btn-primary next">
+                            Next
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /blueimp-gallery -->
+
+</div> <!-- /container -->
+
+<!-- scripts -->
+<script src="libs/jquery/dist/jquery.min.js"></script>
+<script src="javascripts/app.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- blueimp-gallery --->
+<script src="javascripts/jquery.blueimp-gallery.min.js"></script>
+<script src="javascripts/bootstrap-image-gallery.min.js"></script>
+<script src="javascripts/custom_gallery.js"></script>
 
 </body>
 </html>
