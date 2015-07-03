@@ -6,7 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+var indexRoutes = require('./routes/index');
+var apiRoutes = require('./routes/apiRoutes');
 
 var app = express();
 var port = 60127;
@@ -22,8 +23,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'anotherPublic')));
 
-app.use('/', routes);
+app.use('/', indexRoutes);
+app.use('/api', apiRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -35,4 +38,8 @@ app.use(function(req, res, next) {
 var server = http.createServer(app);
 server.listen(port, function() {
     console.log('> Server listening on port: ' + port);
+});
+
+process.on('uncaughtException', function (err) {
+    console.log(err);
 });
