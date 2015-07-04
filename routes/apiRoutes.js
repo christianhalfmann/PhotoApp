@@ -1,7 +1,8 @@
 var http = require('http');
 var express = require('express');
 var router = express.Router();
-var serverData = require('../config').dataServer;
+//var serverData = require('../config').dataServer;
+var serverData = require('../config').lyraServer;
 
 // SESSION ROUTES
 

@@ -9,6 +9,11 @@ module.exports.dataServer = {
     port: 80
 };
 
+module.exports.lyraServer = {
+    host: 'lyra.et-inf.fho-emden.de',
+    port: 60159
+};
+
 module.exports.testServer = {
     host: '192.168.1.60',
     port: 60159
