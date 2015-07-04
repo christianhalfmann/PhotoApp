@@ -1,4 +1,6 @@
+\clearpage
 \section{Webserver (AW)}
+\label{section_webserver}
 Der Webserver nimmt Anfragen des Clients über HTTP entgegen. Er liefert zum einen die 
 Internetseite an den Client aus, über die der Benutzer mit der Anwendung interagiert und 
 kommuniziert zum anderen mit dem Datenserver.
@@ -8,7 +10,7 @@ folgenden Abbildung \ref{fig_webserver_webclient} dargestellt:
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=14cm]{bilder/abbildung_webserver_webclient}
+	\includegraphics[width=\textwidth]{bilder/abbildung_webserver_webclient}
 	\caption{Kommunikation zwischen Webclient und Webserver}
 	\label{fig_webserver_webclient}
 \end{figure}
@@ -43,16 +45,16 @@ Anfragen richten kann:
 
 Die in Tabelle angegeben Endpunkte werden wie folgt verwendet:
 
-Der Pfad \glqq / \grqq{} wird durch den Browser des Clients über die Eingabe des Domainnamens aufgerufen.
+Der Pfad "/"{} wird durch den Browser des Clients über die Eingabe des Domainnamens aufgerufen.
 
-Der Pfad \glqq /api/sessions/:id \grqq{} wird über einen AJAX-Request aufgerufen, wenn auf der Startseite eine Session-ID 
-eingeben wird und der Benutzer den Knopf \glqq Senden \grqq{} drückt.
+Der Pfad "/api/sessions/:id"{} wird über einen AJAX-Request aufgerufen, wenn auf der Startseite eine Session-ID 
+eingeben wird und der Benutzer den Knopf  "Senden" drückt.
 
-Die Pfade \glqq /api/thumbnails/:id \grqq{} und \glqq /api/images/:id \grqq{} werden in der Datei index.html als Atrribute des Tags \textit{\textless img\textgreater} verwendet.
+Die Pfade "/api/thumbnails/:id"{} und "/api/images/:id"{} werden in der Datei \textit{index.html} als Attribute des Tags \textit{\textless img\textgreater} verwendet.
 
 \subsection{Realisierung}
-Der Webserver ist in JavaScript auf der Node.js-Plattform implementiert. Zur vereinfachten Installation und bequemeren Handhabung von Anfragen an den Server wird das Framework \textit{Express.js} verwendet. %\clearpage
-
+Der Webserver ist in JavaScript auf der Node.js-Plattform implementiert. Zur vereinfachten Installation und bequemeren Handhabung von Anfragen an den Server wird das Framework \textit{Express.js} verwendet. 
+\clearpage
 Die Darstellung der Ordnerstruktur enthält folgende Abbildung \ref{fig_struktur_webserver}:
 \begin{figure}[h]
 	\centering
@@ -66,22 +68,25 @@ definiert unter anderem Abhängigkeiten zu Paketen.
 
 Die Datei \textit{config.js} enthält die URL und Ports der beteiligten Server.
 
-In der Datei \textit{app.js} sind die Befehle zur Erzeugung des Web-Servers enthalten . Weiter werden in dieser Datei die übrigen Dateien zur Konfiguration der Datenbank und der Routen importiert. In Listing \ref{list_server} ist die Datei auszugsweise vorgestellt.
+In der Datei \textit{app.js} sind die Befehle zur Erzeugung des Web-Servers enthalten. Weiter werden in dieser Datei die übrigen Dateien und die Routen importiert. In Listing \ref{list_server} ist die Datei auszugsweise vorgestellt.
 
+\begin{figure}[h]
 \begin{lstlisting}[caption={Auszug aus app.js}, label=list_server]
-var express	= require("express"); // express importieren
-var app		= express(); // Anwendung / Web-Server initialisieren
-var indexRoutes = require("'./routes/index"); // Routen importieren
-var apiRoutes = require("./routes/apiRoutes"); // Routen importieren
+var express	= require("express"); // import express.js module
+var app		= express(); // initialize app / server
+var indexRoutes = require("'./routes/index"); // import routes
+var apiRoutes = require("./routes/apiRoutes"); // import more routes
 
-app.use("/", routes); // Routen verwenden für Anfragen an den Server
-app.listen(60127); // Web-Server starten, auf Anfragen an Port 60127 hören
+app.use("/", routes); // use routes for requests to server
+app.listen(60127); // start server listening on port 60127
 \end{lstlisting}
+\end{figure}
 
 Das Listing zeigt, wie zunächst die verwendeten Module mit \textit{require} importiert werden und die Anwendung anschließend Anwendung initialisiert wird. Im Anschluss werden die importierten Routen in die Anwendung integriert und zum Schluss der Server gestartet. Der Server hört auf Anfragen an den definierten Port.
 
-Die einzelnen Endpunkte der Schnittstelle sind wie in Listing \ref{list_api} implementiert:
+Die einzelnen Endpunkte der Schnittstelle (Routen) sind wie in Listing \ref{list_api} abgebildet implementiert:
 
+\begin{figure}
 \begin{lstlisting}[caption={Auszug aus den Dateien routes/index.js und routes/apiRoutes.js}, label=list_api]
 /* GET home page. */
 router.get("/", function(req, res, next) {
@@ -127,13 +132,14 @@ router.get("/sessions/:id", function(req, res, next) {
 	}).end();
 });
 \end{lstlisting}
+\end{figure}
 
-Die erste Route in den Zeilen 2-4 reagiert auf die Anfrage an den Pfad \glqq / \grqq{}.
+Die erste Route in den Zeilen 2-4 reagiert auf die Anfrage an den Pfad "/".
 Sie sendet daraufhin die HTML-Datei an den Client zurück.
 
 Die zweite Route in den Zeilen 7 bis 40 ist verantwortlich für Anfragen an den Pfad 
-\glqq /api/sessions/:id \grqq{}, die Funktionsweise ist jedoch identisch zur Anfragen 
-an \glqq /api/images/:id \grqq{} und \glqq /api/thumbnails/:id grqq{}.
+"/api/sessions/:id", die Funktionsweise ist jedoch identisch zur Anfragen 
+an "/api/images/:id"{} und "/api/thumbnails/:id".
 
 Wenn eine Anfrage an diese Pfade eingeht, wird eine entsprechende HTTP-Anfrage 
 an den Datenserver gerichtet und die zurückerhaltene Antwort an den Webclient 
@@ -143,5 +149,8 @@ Zunächst wird aus den Request-Parametern die ID ausgelesen (Zeile 8). Anschlie�
 wird ein Objekt erzeugt, das die Art der ausgehenden HTTP steuert (Zeilen 10-16).
 Der HTTP Request wird mit den gegebenen Optionen an den Datenserver gesandt (Zeile 19 bis 42).
 Die zurückkommende Antwort wird verarbeitet und an den Webclient weitergeleitet (Zeilen 21 bis 40).
+
+Die Anwendung enthält im Übrigen den Ordner \textit{public}, der die Dateien des Webclients 
+enthält (vgl. Abschnitt \ref{section_webclient}).
 
 

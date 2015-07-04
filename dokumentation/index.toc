@@ -1,8 +1,10 @@
 \select@language {ngerman}
-\contentsline {section}{\numberline {1}Allgemeine Funktionsweise}{2}{section.1}
-\contentsline {section}{\numberline {2}Webclient}{3}{section.2}
-\contentsline {section}{\numberline {3}Webserver (AW)}{3}{section.3}
-\contentsline {subsection}{\numberline {3.1}Schnittstellen}{4}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Realisierung}{4}{subsection.3.2}
-\contentsline {section}{\numberline {4}Datenserver}{6}{section.4}
-\contentsline {section}{\numberline {5}Datenbank}{7}{section.5}
+\contentsline {section}{\numberline {1}Allgemeine Funktionsweise (AW)}{2}{section.1}
+\contentsline {section}{\numberline {2}Webclient (CH)}{3}{section.2}
+\contentsline {section}{\numberline {3}Webserver (AW)}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}Schnittstellen}{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Realisierung}{5}{subsection.3.2}
+\contentsline {section}{\numberline {4}Datenserver (AW)}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}Schnittstellen}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Realisierung}{10}{subsection.4.2}
+\contentsline {section}{\numberline {5}Datenbank (AW)}{12}{section.5}
