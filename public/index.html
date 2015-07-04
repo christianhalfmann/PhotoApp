@@ -25,12 +25,10 @@
     <!-- Logo -->
     <div class="row">
         <div class="col-xs-0 col-sm-0 col-md-3"></div>
-        <div class="col-xs-8 col-sm-6 col-md-4">
+        <div class="col-xs-9 col-sm-6 col-md-4">
             <img src="images/PM_Logo_Standard_grid.png" alt="Logo" class="img-responsive"> <br /><br />
         </div>
     </div>
-
-    <div id="test"></div>
 
     <!-- Page 1 - Authentication-->
     <div id="page1">
@@ -41,26 +39,34 @@
                     <p id="start"> Willkommen bei Picture Moments! <br /> Hier hast Du die Möglichkeit Bilder Deiner Foto-Session Online zu betrachten. Bitte
                         gib dafür Deine Session-ID ein.</p>
                     </p>
+                    <p id="error">Die eingegebene Session ID ist nicht vergeben. Bitte kontrolliere Deine Eingabe oder versuche es zu einem späteren Zeitpunkt
+                        noch einmal.</p>
+                    </p>
                 </div>
 
                 <!-- Formular + Button -->
-                <form id="form" method="post" action="/">
+                <form method="post"  id="formSessionId">
                     <div class="form-group">
-                        <label for="exampleInputPassword1"></label>
+                        <label for="inputSessionId"></label>
                         <input type="text"
                                class="form-control"
-                               id="exampleInputPassword1"
+                               id="inputSessionId"
                                name="sessionID"
-                               placeholder="Session-ID eingeben">
+                               placeholder="Session ID eingeben"
+                               required />
                     </div>
-                    <div id="ok_button">
-                        <button id="ok" type="submit" class="btn btn-primary">OK</button>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="buttonRequestSessionID">OK</button>
                     </div>
                 </form>
             </div>
         </div>
     </div> <!-- /page1 -->
-
+    <!--
+    <div class="col-sm-12">
+        <p id="sessionData"></p>
+    </div>
+-->
     <!-- Page 2 - Welcome -->
     <div id="page2">
         <div class="row">
@@ -84,20 +90,20 @@
     <div id="page3">
         <div class="row">
             <div class="col-xs-0 col-sm-0 col-md-3"></div>
-
             <div class="col-xs-12 col-sm-12 col-md-6">
 
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary btn-lg">
-                        <i class="glyphicon glyphicon-new-window"></i>
-                        <input id="borderless-checkbox" type="checkbox"> Borderless
-                    </label>
-                    <label class="btn btn-primary btn-lg">
-                        <i class="glyphicon glyphicon-fullscreen"></i>
-                        <input id="fullscreen-checkbox" type="checkbox"> Fullscreen
-                    </label>
+                <div class="hidden-xs">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary btn-lg">
+                            <i class="glyphicon glyphicon-new-window"></i>
+                            <input id="borderless-checkbox" type="checkbox"> Borderless
+                        </label>
+                        <label class="btn btn-primary btn-lg">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                            <input id="fullscreen-checkbox" type="checkbox"> Fullscreen
+                        </label>
+                    </div>
                 </div>
-
 
                 <div id="links"></div>
 
@@ -132,11 +138,11 @@
 
                 <!--- Button -->
                 <br />
-                <div id="back_button_page3"
+                <div id="back_button_page3">
                 <a class="btn btn-primary" role="button">
                     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </a>
-            </div>
+                </div>
             </div>
         </div>
     </div> <!-- /page3 -->
@@ -150,7 +156,7 @@
                     <!-- <iframe class="embed-responsive-item" src="clips/In-Studio.mp4"></iframe>-->
                 </div>
                 <br />
-                <div id="back_button_page4"
+                <div id="back_button_page4">
                     <a class="btn btn-primary" role="button">
                         <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                     </a>
@@ -160,35 +166,6 @@
     </div> <!-- /page4 -->
 
     <!-- Page 5 - Error -->
-    <div id="page5">
-        <div id="page1">
-            <div class="row">
-                <div class="col-xs-0 col-sm-0 col-md-3"></div>
-                <div class="col-xs-12 col-sm-12 col-md-6">
-                    <div class="jumbotron">
-                        <p id="error"> <p>Die eingegebene Session ID ist nicht vergeben. Bitte kontrolliere Deine Eingabe oder versuche es zu einem späteren Zeitpunkt
-                        noch einmal.</p>
-                        </p>
-                    </div>
-
-                    <!-- Formular + Button -->
-                    <form id="form" method="post" action="/">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1"></label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="exampleInputPassword1"
-                                   name="sessionID"
-                                   placeholder="Session-ID eingeben">
-                        </div>
-                        <div id="ok_button">
-                            <button type="submit" class="btn btn-primary">OK</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> <!-- page5 -->
 
     <!-- Modal -->
     <div id="blueimp-gallery" class="blueimp-gallery">
