@@ -6,118 +6,62 @@ var serverData = require('../config').lyraServer;
 
 // SESSION ROUTES
 
-/* GET request to /api/sessions to retrieve all sessions. */
-router.get('/sessions', function getSessions(req, res, next) {
-    // create options object for the following request
-    var options = {
-        host: serverData.host,
-        port: serverData.port,
-        path: '/api/sessions',
-        method: 'GET',
-        accept: 'application/json'
-    };
-
-    // create and send request
-    http.request(options, function(response) {
-        console.log(response);
-        // react to the server's response...
-        response.on('data', function(data) {
-            // ... by passing the responded data as
-            // json to the client
-            res.json(JSON.parse(data));
-        });
-    }).end();
+router.get('/sessions/:id', function getSessionById(req, res) {
+    reactToRequest(req, res);
 });
 
-router.get('/sessions/:id', function getSessionById(req, res, next) {
-    var sessionId = req.params.id;
-    // create options object for the following request
+// IMAGE ROUTES
+
+router.get('/thumbnails/:id', function getThumnailById(req, res) {
+    reactToRequest(req, res);
+});
+
+/* GET request to /api/images/:id. */
+router.get('/images/:id', function getImageById(req, res) {
+    reactToRequest(req, res);
+});
+
+var reactToRequest = function(req, res) {
+    var id = req.params.id;
+    var path = req.url.split('/')[1];
+    var acceptType = (path == 'sessions') ? 'application/json' : 'image/*';
     var options = {
         host: serverData.host,
         port: serverData.port,
-        path: '/api/sessions/' + sessionId,
+        path: '/api/'+ path + '/' + id,
         method: 'GET',
-        accept: 'application/json'
+        accept: acceptType
     };
 
-    // create and send request
     http.request(options, function(response) {
-
         // check response for error
         if (response.statusCode == '404') {
             return res.status(404).send();
         }
 
-        // react to the server's response...
-        response.on('data', function(data) {
-            // ... by passing the responded data as
-            // json to the client
-            res.json(JSON.parse(data));
-        });
-    }).end();
-});
-
-// IMAGE ROUTES
-
-router.get('/thumbnails/:id', function(req, res, next) {
-    var thumbId = req.params.id;
-    // create options object for the following request
-    var options = {
-        host: serverData.host,
-        port: serverData.port,
-        path: '/api/thumbnails/' + thumbId,
-        method: 'GET',
-        accept: 'image/*'
-    };
-
-    // create and send request
-    http.request(options, function(response) {
         var contentType = response.headers['content-type'];
-        var tmpData = '';
-        response.pipe(res);
+        var resData = '';
+
+        if (path != 'sessions') {
+            // pipe incoming response to outgoing response object
+            response.pipe(res);
+        }
 
         // react to the server's response...
         response.on('data', function(data) {
             // ... by passing writing data to the tmpImage variable
-            tmpData += data;
+            resData += data;
         });
 
         response.on('end', function() {
             res.set('Content-Type', contentType);
-            res.end(tmpData, 'binary');
-        })
-    }).end();
-});
-
-/* GET request to /api/images/:id. */
-router.get('/images/:id', function(req, res, next) {
-    var thumbId = req.params.id;
-    // create options object for the following request
-    var options = {
-        host: serverData.host,
-        port: serverData.port,
-        path: '/api/images/' + thumbId,
-        method: 'GET',
-        accept: 'image/*'
-    };
-
-    // create and send request
-    http.request(options, function(response) {
-        var contentType = response.headers['content-type'];
-        var tmpData = '';
-        response.pipe(res);
-
-        // react to the server's response...
-        response.on('data', function(data) {
-            // ... by passing writing data to the tmpImage variable
-            tmpData += data;
+            if (path == 'sessions') {
+                res.json(JSON.parse(resData));
+            } else {
+                res.end(resData, 'binary');
+            }
         });
-
-        response.on('end', function() {
-            res.set('Content-Type', contentType);
-            res.end(tmpData, 'binary');
-        })
     }).end();
-});
+};
 
 module.exports = router;
