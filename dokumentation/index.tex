@@ -1,0 +1,65 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[english,ngerman]{babel}
+\usepackage[autostyle,german=guillemets]{csquotes}
+\usepackage{parskip}
+\usepackage{scrpage2}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{todonotes}
+\usepackage[nottoc]{tocbibind}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{courier}
+\usepackage{chngcntr}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+
+%opening
+\title{Technische Dokumentation zur erstellten Anwendung,\\
+	Modul: Internetanwendungen für mobile Geräte,\\Sommersemester 2015}
+\author{Andreas Willems}
+\date{\today}
+
+\begin{document}
+	% config for listings
+	\lstset{
+		language=HTML,
+		%		extendedchars=true,
+		escapeinside={\%*}{*)},
+		showstringspaces=false,
+		captionpos=b,
+		basicstyle=\footnotesize\ttfamily,
+		numbers=left,
+		numberblanklines=true,
+		tabsize=4,
+		breaklines=true,
+		literate={ä}{{\"a}}1
+		{ö}{{\"o}}1
+		{ü}{{\"u}}1
+	}
+
+\maketitle
+
+\begin{abstract}
+Die erstellte Anwendung ermöglicht das Abrufen von Fotos aus einer Fotosession über ein mobiles Endgerät (z.B. Smartphone) über das Internet. Hierzu wurden ein Web-Client, ein Web-Server sowie ein Datenserver erstellt.
+\end{abstract}
+%\newpage
+%\listoftodos
+\tableofcontents
+\newpage
+\input{sections/section_allgemeines}
+\input{sections/section_webclient}
+\input{sections/section_webserver}
+\input{sections/section_datenserver}
+\input{sections/section_datenbank}
+
+
+
+\end{document}

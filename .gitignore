@@ -3,3 +3,8 @@ public/libs
 public/images
 *.log
 .idea
+*.aux
+*.out
+*.synctex.gz
+*.tdo
+*.toc

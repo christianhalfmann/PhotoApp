@@ -103,6 +103,4 @@
     function hideSessionInput() {
         $('#formSessionId').hide();
     }
-
-
 })();
