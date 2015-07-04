@@ -19,6 +19,7 @@ router.get('/sessions', function getSessions(req, res, next) {
 
     // create and send request
     http.request(options, function(response) {
+        console.log(response);
         // react to the server's response...
         response.on('data', function(data) {
             // ... by passing the responded data as
@@ -41,6 +42,12 @@ router.get('/sessions/:id', function getSessionById(req, res, next) {
 
     // create and send request
     http.request(options, function(response) {
+
+        // check response for error
+        if (response.statusCode == '404') {
+            return res.status(404).send();
+        }
+
         // react to the server's response...
         response.on('data', function(data) {
             // ... by passing the responded data as
