@@ -71,7 +71,7 @@
                     appendSessionView(data);
                 })
                 .fail(function(err) {
-                    alert(err)
+                    alert(err);
                     $('#start').hide();
                     $('#error').show();
                 })
