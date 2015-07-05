@@ -4,103 +4,100 @@
 
 (function() {
 
-    var name = "Christian"
-
 
     // Start Condition
     $(document).ready(function(){
-        $('#error').hide()
-        $('#page2').hide()
-        $('#page3').hide()
-        $('#page4').hide()
+
+        $('#greeterHeading').text('Willkommen bei Picture Moments! Hier hast Du die Möglichkeit Bilder' +
+            ' Deiner Foto-Session Online zu betrachten. Bitte gib dafür Deine Session-ID ein.');
+
+        $('#pickButton').hide();
+        $('#galleryButton').hide();
+        $('#backButton').hide();
 
         $('#buttonRequestSessionID').on('click', requestSession);
         $('form').on('submit', function(evt){
             evt.preventDefault();
         });
-
-
-        $('#start').click(function(){
-
-            $('#page1').hide()
-            $('#name').text(name);
-            $('#page2').show()
-
-        });
-
-        $('#pictures').click(function(){
-            $('#page2').hide()
-            $('#page3').show()
-
-        });
-
-        $('#videos').click(function(){
-            $('#page2').hide()
-            $('#page4').show()
-
-        });
-
-        $('#back_button_page3').click(function(){
-            $('#page3').hide()
-            $('#page2').show()
-
-        });
-
-        $('#back_button_page4').click(function(){
-            $('#page4').hide()
-            $('#page2').show()
-
-        });
-
     });
-
 
     function requestSession(evt) {
 
         var id = $('#inputSessionId').val();
         if (id !== '') {
-            $('#eventText').html('<img src="img/loading.gif"> loading...');
+            $('#eventText').html('<img src="imgages/loading.gif"> loading...');
             var jqxhr = $.ajax('/api/sessions/' + id)
                 .done(function() {
-                    alert('done');
-                    hideSessionInput();
+                    //alert('done');
+                    //hideSessionInput();
                 })
                 .success(function(data, textStatus) {
                     //console.log(data);
-                    alert('success');
+                    //alert('success');
                     appendSessionView(data);
                 })
                 .fail(function(err) {
-                    alert(err);
-                    $('#start').hide();
-                    $('#error').show();
+                    //alert(err);
+                    $('#greeterHeading').css({"color": "#C1121C"}).html('Die eingegebene Session ID ist nicht vergeben. ' +
+                        'Bitte kontrolliere Deine Eingabe oder versuche es zu einem späteren Zeitpunkt noch einmal.');
                 })
                 .always(function() {
                     //alert( "complete" );
                 });
         } else {
-            alert('No session id given!');
+            //alert('No session id given!');
+            $('#greeterHeading').css({"color": "#C1121C"}).html('Es wurde keine Eingabe getätigt. ' +
+                'Bitte gib Deine Session-ID ein.');
         }
     }
 
     function appendSessionView(sessionData) {
+        //alert('Bingo!');
         var imagesHTML = '';
         sessionData.images.forEach(function(image) {
-            var link = '<a href="/api/images/' + image + '" class="thumbnail">';
+
+            var link = '<div class="col-xs-6 col-md-3"><a href="/api/images/' + image + '" class="thumbnail" data-gallery>';
             link += '<img src="/api/thumbnails/'
-                + image + '" class="img-responsive" width="200" height="200" alt="' + image + '" />';
-            link += '</a>';
+                + image + '" class="img-responsive" width="200" height="200" alt="' + image + '" /></a>';
+
+            link += '</div>';
             imagesHTML += link;
         });
 
-        var name = sessionData.client.firstname + ' '
+        var name = sessionData.client.surname + ' '
             + sessionData.client.lastname;
 
-        $('#greeterHeading').html('Hallo, ' + name);
-        $('#sessionData').html(imagesHTML);
+
+        $('#greeterHeading').css({"color": "#8D9091"}).html('Hallo ' + name + '. Die Bilder Deiner Session liegen hier bereit. ' +
+            'Du kannst Dich durch alle Bilder durchklicken oder sie als Slideshow betrachten. Viel Spaß!');
+
+        hideSessionInput();
+        showButtons();
+
+        $('#pictures').click(function(){
+            $('#jumbotron').hide();
+            $('#pickButton').hide();
+            $('#galleryButton').show();
+            $('#sessionData').html(imagesHTML);
+            $('#sessionData').show();
+            $('#backButton').show();
+        });
     }
+
+    $('#backButton').click(function() {
+        $('#jumbotron').show();
+        $('#pickButton').show();
+        $('#galleryButton').hide();
+        $('#backButton').hide();
+        $('#sessionData').hide();
+    });
 
     function hideSessionInput() {
         $('#formSessionId').hide();
     }
+
+    function showButtons() {
+        $('#pickButton').show();
+    }
+
 })();
