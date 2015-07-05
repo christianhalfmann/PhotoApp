@@ -76,17 +76,17 @@
 
         $('#pictures').click(function(){
             $('#jumbotron').hide();
-            $('#buttons').hide();
+            $('#pickButton').hide();
             $('#galleryButton').show();
             $('#sessionData').html(imagesHTML);
+            $('#sessionData').show();
             $('#backButton').show();
         });
-
     }
 
     $('#backButton').click(function() {
         $('#jumbotron').show();
-        $('#buttons').show();
+        $('#pickButton').show();
         $('#galleryButton').hide();
         $('#backButton').hide();
         $('#sessionData').hide();
@@ -97,7 +97,7 @@
     }
 
     function showButtons() {
-        $('#buttons').show();
+        $('#pickButton').show();
     }
 
 })();
