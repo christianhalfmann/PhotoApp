@@ -25,7 +25,7 @@
 
         var id = $('#inputSessionId').val();
         if (id !== '') {
-            $('#eventText').html('<img src="imgages/loading.gif"> loading...');
+            $('#buttonRequestSessionID').html('<img src="/images/loading.gif" width="100" height="67"> loading...');
             var jqxhr = $.ajax('/api/sessions/' + id)
                 .done(function() {
                     //alert('done');
@@ -64,7 +64,7 @@
             imagesHTML += link;
         });
 
-        var name = sessionData.client.surname + ' '
+        var name = sessionData.client.firstname + ' '
             + sessionData.client.lastname;
 
 
