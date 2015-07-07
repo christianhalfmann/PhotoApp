@@ -84,6 +84,7 @@ Des Weiteren stellt die \textit{app.js} die Funktion requestSession zur AJAX Kom
 	}
 	\end{lstlisting}
 \end{figure}
+\clearpage
 
 Der Client ruft hierbei Daten vom Webserver, die dort unter einer bestimmten Session ID gespeichert sind, ab. Bei einer ungültigen ID sendet der Webserver den Fehlercode 404 zurück an den Webclient und der Fail-Zweig der If-Abfrage wird ausgeführt. Bei einer gültigen Session ID wird der Success-Zweig ausgeführt und die Daten vom Webserver an die Funktion appendSessionView übergeben.
 
