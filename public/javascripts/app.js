@@ -56,9 +56,12 @@
         var imagesHTML = '';
         sessionData.images.forEach(function(image) {
 
-            var link = '<div class="col-xs-6 col-md-3"><a href="/api/images/' + image + '" class="thumbnail" data-gallery>';
+        var link = '<div class="col-xs-6 col-md-3"><a href="/api/images/'
+            + image + '" class="thumbnail" data-gallery>';
+
             link += '<img src="/api/thumbnails/'
-                + image + '" class="img-responsive" width="200" height="200" alt="' + image + '" /></a>';
+                + image + '" class="img-responsive" width="200" height="200" alt="'
+                + image + '" /></a>';
 
             link += '</div>';
             imagesHTML += link;
@@ -68,8 +71,13 @@
             + sessionData.client.lastname;
 
 
-        $('#greeterHeading').css({"color": "#8D9091"}).html('Hallo ' + name + '. Die Bilder Deiner Session liegen hier bereit. ' +
-            'Du kannst Dich durch alle Bilder durchklicken oder sie als Slideshow betrachten. Viel Spaß!');
+        $('#greeterHeading')
+            .css({"color": "#8D9091"})
+            .html('Hallo '
+                + name
+                + '. Die Bilder Deiner Session liegen hier bereit. '
+                + 'Du kannst Dich durch alle Bilder durchklicken '
+                + 'oder sie als Slideshow betrachten. Viel Spaß!');
 
         hideSessionInput();
         showButtons();
