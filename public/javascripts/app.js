@@ -1,7 +1,8 @@
 /**
  * View Controller
  * @author Christian Halfmann
- * @version 07 JUL 2015
+ * @version 07 JUL 2015 - CH
+ *          08 JUL 2015 - AW
  */
 
 (function() {
@@ -27,45 +28,46 @@
         }
     };
 
+    // reference to the IDBHandler
+    var idb;
+
     // Start Condition
     $(document).ready(function(){
+
+        idb = new IDBHandler(requestSession);
+        idb.openDB(); // open indexedDB
 
         $('#greeterHeading').html('Willkommen bei Picture Moments!<br/>Hier hast Du die Möglichkeit Bilder' +
             ' Deiner Foto-Session Online zu betrachten. Bitte gib dafür Deine Session-ID ein.');
         $('#pickButton').hide();
         $('#galleryButton').hide();
         $('#backButton').hide();
-        $('#buttonRequestSessionID').on('click', requestSession);
+        $('#buttonRequestSessionID').on('click', function(evt) {
+            var id = $('#inputSessionId').val();
+            requestSession(id);
+        });
         $('form').on('submit', function(evt){
             evt.preventDefault();
-
         });
     });
 
     // Communication between WebClient and WebServer
-    function requestSession(evt) {
-
-        var id = $('#inputSessionId').val();
+    function requestSession(id) {
+        //var id = $('#inputSessionId').val();
         if (id !== '') {
             //$('#eventText').html('<img src="images/loading.gif"> loading...');
             var jqxhr = $.ajax('/api/sessions/' + id)
-                .done(function() {
-                    //alert('done');
-                    //hideSessionInput();
-                })
+                .done(function() {})
                 .success(function(data, textStatus) {
-                    //console.log(data);
-                    //alert('success');
+                    idb.storeSessionDataInIndexedDB(data, data.sessionId);
                     appendSessionView(data);
                 })
                 .fail(function(err) {
-                    //alert(err);
+                    console.log(err);
                     $('#greeterHeading').css({"color": "#C1121C"}).html('Die eingegebene Session ID ist nicht vergeben. ' +
                         'Bitte kontrolliere Deine Eingabe oder versuche es zu einem späteren Zeitpunkt noch einmal.');
                 })
-                .always(function() {
-                    //alert( "complete" );
-                });
+                .always(function() {});
         } else {
             //alert('No session id given!');
             $('#greeterHeading').css({"color": "#C1121C"}).html('Es wurde keine Eingabe getätigt. ' +
@@ -113,7 +115,9 @@
         });
 
         $('#idBack').click(function(){
-            location.reload();
+            //location.reload();
+            $('#formSessionId').show();
+            $('#pickButton').hide();
         });
     }
 
@@ -146,7 +150,7 @@
             $('#blueimp-gallery').data('fullScreen', $(this).is(':checked'));
         });
 
-    }else {
+    } else {
         // Initial Lightbox view for desktop devices
         $('#borderless-checkbox').on('change', function () {
             var borderless = $(this).is(':checked');
