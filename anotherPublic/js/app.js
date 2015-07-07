@@ -10,7 +10,7 @@
         var id = $('#inputSessionId').val();
         if (id !== '') {
             $('#eventText').html('<img src="img/loading.gif"> loading...');
-            var jqxhr = $.ajax('/api/sessions/' + id)
+            //var jqxhr = $.ajax('/api/sessions/' + id)
                 .done(function() {
                     hideSessionInput();
                 })
