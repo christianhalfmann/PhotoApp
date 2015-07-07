@@ -1,3 +1,10 @@
+/**
+ * Controllers for requests to /api/...
+ *
+ * @author Andreas Willems
+ * @version 06 JUL 2015
+ */
+
 var http = require('http');
 var express = require('express');
 var router = express.Router();

@@ -1,4 +1,4 @@
-\BOOKMARK [1][-]{section.1}{Allgemeine Funktionsweise \(AW\)}{}% 1
+\BOOKMARK [1][-]{section.1}{Allgemeine Funktionsweise \(AW/CH\)}{}% 1
 \BOOKMARK [1][-]{section.2}{Webclient \(CH\)}{}% 2
 \BOOKMARK [1][-]{section.3}{Webserver \(AW\)}{}% 3
 \BOOKMARK [2][-]{subsection.3.1}{Schnittstellen}{section.3}% 4
@@ -7,3 +7,4 @@
 \BOOKMARK [2][-]{subsection.4.1}{Schnittstellen}{section.4}% 7
 \BOOKMARK [2][-]{subsection.4.2}{Realisierung}{section.4}% 8
 \BOOKMARK [1][-]{section.5}{Datenbank \(AW\)}{}% 9
+\BOOKMARK [1][-]{section.6}{Lessons learned}{}% 10

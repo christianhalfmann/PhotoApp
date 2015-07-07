@@ -1,10 +1,11 @@
-\section{Allgemeine Funktionsweise (AW)}
-Der Kunde eines Fotografen bekommt nach einer Fotositzung (Session) eine Karte mit 
-einer Session-ID überreicht. Anhand dieser ID, welche sich in der aufgerufenen 
-Anwendung eingeben lässt, werden die Bilder aus der Session beim Kunden im Endgerät
-(Desktop-Browser oder Smartphone-Browser) dargestellt.
+\section{Allgemeine Funktionsweise (AW/CH)}
+Die FotoApp wurde in Zusammenarbeit mit einer Fotografin erarbeitet und entwickelt. Die Fotografin ist spezialisiert auf Familien Fotografie und möchte den fotografierten Familien zukünftig auch einen Online-Service bieten. 
 
-Der generelle Aufbau lässt sich der folgenden Abbildung \ref{fig_genereller_aufbau} entnehmen.
+Da Nutzer mobiler Endgeräte ihre Smartphones oder Tablets vermehrt auch zum Speichern und Betrachten ihrer eigenen Fotos und Bildergalerien nutzen, sollen – als zusätzlicher Service für die Kunden der Fotografin – die Bilder einer Foto Session zukünftig auch Online, speziell für den Abruf über mobile Endgeräte zur Verfügung gestellt werden.   
+
+Die Kunden bekommen nach einer Fotosession eine individuelle Session-ID ausgehändigt. Mit dieser ID haben sie innerhalb der Anwendung Zugang auf die Fotos ihrer Fotosession und können diese online (über einen Desktop-Browser oder einen Mobile-Browser) betrachten.
+
+Die folgende Abbildung \ref{fig_genereller_aufbau} zeigt den generellen Aufbau der Anwendung.
 
 \begin{figure}[h]
 	\centering
@@ -21,4 +22,4 @@ Wie in der Grafik zu sehen ist, besteht die Anwendung aus vier den Komponenten
 	\item \textbf{Datenbank}: die Datenbank dient der persistenten Haltung von Sitzungsdaten und Fotos
 \end{itemize}
 
-Im Folgenden werden die einzelnen Komponenten weiter vorgestellt und ihre Funktionsweise erläutert.
+Im Folgenden werden die einzelnen Komponenten im Detail vorgestellt und ihre Funktionsweise erläutert.
