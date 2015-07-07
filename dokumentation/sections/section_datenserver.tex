@@ -116,8 +116,7 @@ In den Zeilen 6 - 19 ist der Controller für den Pfad "/api/sessions/:id"{} zu s
 Dieser entnimmt den Request-Parametern die zu suchende ID und nutzt das Session-Model,
 um eine Datenbankanfrage durchzuführen. Eine gefundene Session wird an den Client
 (in diesem Fall der Webserver) zurückgegeben. Wird keine Session gefunden, wird der 
-Statuscode 404 ("nicht gefunden") zurückgesendet.
-
+Statuscode 404 ("nicht gefunden") zurückgesendet.\clearpage
 
 Die Zeilen 23 - 33 enthalten die Definition der Methode \textit{getOne} auf dem Modell \textit{Session}.
 Darin wird mithilfe des Moduls \textit{mongo-crud-layer} (hier: mongoCrud) eine Suchanfrage

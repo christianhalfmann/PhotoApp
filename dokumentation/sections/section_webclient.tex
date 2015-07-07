@@ -59,7 +59,7 @@ Die \textit{index.html} gibt die Struktur der Web-Anwendung vor. Sie beinhaltet 
 
 Des Weiteren stellt die \textit{app.js} die Funktion requestSession zur AJAX Kommunikation zwischen Webclient und Webserver bereit.
 
-\begin{figure}[h]
+%\begin{figure}[h]
 	\begin{lstlisting}[caption={Auszug aus app.js (Webclient)}, label=list_client]
 	function requestSession(evt) {
 		var id = $('#inputSessionId').val();
@@ -83,14 +83,14 @@ Des Weiteren stellt die \textit{app.js} die Funktion requestSession zur AJAX Kom
 		}
 	}
 	\end{lstlisting}
-\end{figure}
-\clearpage
+%\end{figure}
+%\clearpage
 
 Der Client ruft hierbei Daten vom Webserver, die dort unter einer bestimmten Session ID gespeichert sind, ab. Bei einer ungültigen ID sendet der Webserver den Fehlercode 404 zurück an den Webclient und der Fail-Zweig der If-Abfrage wird ausgeführt. Bei einer gültigen Session ID wird der Success-Zweig ausgeführt und die Daten vom Webserver an die Funktion appendSessionView übergeben.
 
 In der Funktion appendSessionView werden die Daten vom Webserver verarbeitet und dynamisch in die \textit{index.html} übergeben.
 
-\begin{figure}[h]
+%\begin{figure}[h]
 	\begin{lstlisting}[caption={Auszug aus app.js (Webclient)}, label=list_client]
 	var imagesHTML = '';
 	sessionData.images.forEach(function(image) {
@@ -105,11 +105,11 @@ In der Funktion appendSessionView werden die Daten vom Webserver verarbeitet und
 		imagesHTML += link;
 	});
 	\end{lstlisting}
-\end{figure}
+%\end{figure}
 
 Für jedes Bild wird hier in HTML-Syntax eine Div-Box mit den entsprechenden Attributen erstellt. 
 
-\begin{figure}[h]
+%\begin{figure}[h]
 	\begin{lstlisting}[caption={Auszug aus app.js (Webclient)}, label=list_client]
 	var name = sessionData.client.firstname + ' ' 
 		+ sessionData.client.lastname;
@@ -120,16 +120,17 @@ Für jedes Bild wird hier in HTML-Syntax eine Div-Box mit den entsprechenden Att
 			+ 'Du kannst Dich durch alle Bilder durchklicken und '
 			+ 'sie online betrachten. Viel Spass!');
 	\end{lstlisting}
-\end{figure}
+%\end{figure}
 
 
 Auch der Name wird aus den JSON Daten des Servers hier verarbeitet und mit weiterem Text an die \textit{index.html} übergeben. 
 
 Die Anwendung soll sowohl für Mobile- als auch für Desktopdevices geeignet sein. Daher soll es einige Unterschiede in der Darstellung das jeweilige Device geben. Beispielweise die eingangs erwähnte Darstellung der Bilder (initiale Ansicht in der Lightbox bei Desktop-Browsern mit der Option diese zu verändern und die Borderless/Fullscreen Ansicht für mobile Endgeräte). 
+%\clearpage
 
 Die Unterscheidung der Geräte wird durch Funktionen, die die entsprechenden Geräte erkennen und an die Variable isMobile zurück geben. Durch eine If-Abfrage wird die Darstellung der Website für das entsprechende Device angepasst.
 
-\begin{figure}[h]
+%\begin{figure}[h]
 	\begin{lstlisting}[caption={Auszug aus app.js (Webclient)}, label=list_client]
 	// Variable to detect mobile devices
 	var isMobile = {
@@ -181,11 +182,9 @@ Die Unterscheidung der Geräte wird durch Funktionen, die die entsprechenden Ger
 			$('#blueimp-gallery')
 				.data('fullScreen', $(this).is(':checked'));
 		});
-	}
-	
+	}	
 	\end{lstlisting}
-\end{figure}
-
+%\end{figure}
 In diesem Beispiel wird die Ansichtsart der Bilder für die entsprechenden Devices 
 festgelegt. Im ersten If-Zweig, welchher bei der Nutzung mobiler Geräte aufgerufen 
 wird, werden durch prop() die Checkboxen, welche zur Auswahl der Darstellung 
