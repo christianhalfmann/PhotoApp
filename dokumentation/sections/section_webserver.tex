@@ -84,7 +84,7 @@ app.listen(60127); // start server listening on port 60127
 
 Das Listing zeigt, wie zunächst die verwendeten Module mit \textit{require} importiert werden und die Anwendung anschließend Anwendung initialisiert wird. Im Anschluss werden die importierten Routen in die Anwendung integriert und zum Schluss der Server gestartet. Der Server hört auf Anfragen an den definierten Port.
 
-Die einzelnen Endpunkte der Schnittstelle (Routen) sind wie in Listing \ref{list_api} abgebildet implementiert:
+Die einzelnen Endpunkte der Schnittstelle (Routen) sind beispielhaft in wie Listing \ref{list_api} abgebildet implementiert (die tatsächliche Implementierung ist aufgrund eines Refactorings weniger anschaulich, arbeitet aber identisch):
 
 \begin{figure}
 \begin{lstlisting}[caption={Auszug aus den Dateien routes/index.js und routes/apiRoutes.js}, label=list_api]
@@ -93,7 +93,11 @@ router.get("/", function(req, res, next) {
     res.sendFile('index.html');
 });
 
-/* GET requests to /api/sessions/:id, /api/thumbnails/:id, /api/images/:id */
+/* GET requests to 
+ *        /api/sessions/:id,
+ *        /api/thumbnails/:id and 
+ *        /api/images/:id 
+ */
 router.get("/sessions/:id", function(req, res, next) {
     var sessionId = req.params.id;
     // create options object for the following request
@@ -132,7 +136,7 @@ router.get("/sessions/:id", function(req, res, next) {
 	}).end();
 });
 \end{lstlisting}
-\end{figure}
+\end{figure}\clearpage
 
 Die erste Route in den Zeilen 2-4 reagiert auf die Anfrage an den Pfad "/".
 Sie sendet daraufhin die HTML-Datei an den Client zurück.

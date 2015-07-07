@@ -1,4 +1,4 @@
-\clearpage
+%\clearpage
 \section{Datenserver (AW)}
 \label{section_datenserver}
 Der Datenserver nimmt über eine Schnittstelle im REST-Design\footnote{REST 
@@ -69,7 +69,7 @@ den gleichen Zweck wie auch beim Webserver.
 Der Ordner \textit{controllers} enthält die Routen für die einzelnen Endpunkte der Schnittstelle.
 
 Neu im Vergleich zum Webserver ist hier der Ordner \textit{models}, der Abstraktionen 
-für den Zugriff auf die Datenbank bereithält.\clearpage
+für den Zugriff auf die Datenbank bereithält. %\clearpage
 
 Im folgenden Listing \ref{list_session_controller_model} ist beispielhaft die Reaktion 
 auf eine Anfrage nach einer bestimmten Session dargestellt:
@@ -117,6 +117,7 @@ Dieser entnimmt den Request-Parametern die zu suchende ID und nutzt das Session-
 um eine Datenbankanfrage durchzuführen. Eine gefundene Session wird an den Client
 (in diesem Fall der Webserver) zurückgegeben. Wird keine Session gefunden, wird der 
 Statuscode 404 ("nicht gefunden") zurückgesendet.
+
 
 Die Zeilen 23 - 33 enthalten die Definition der Methode \textit{getOne} auf dem Modell \textit{Session}.
 Darin wird mithilfe des Moduls \textit{mongo-crud-layer} (hier: mongoCrud) eine Suchanfrage
