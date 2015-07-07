@@ -2,7 +2,7 @@
  * The web server's main application file.
  *
  * @author Andreas Willems
- * @version 06 JUL 2015
+ * @version 07 JUL 2015
  */
 var http = require('http');
 var express = require('express');
@@ -25,7 +25,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.static(path.join(__dirname, 'anotherPublic')));
 
 app.use('/', indexRoutes);
 app.use('/api', apiRoutes);
@@ -41,7 +40,3 @@ var server = http.createServer(app);
 server.listen(port, function() {
     console.log('> Server listening on port: ' + port);
 });
-
-/*process.on('uncaughtException', function (err) {
-    return console.log(err);
-});*/

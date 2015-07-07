@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <title>IMG-App</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Christian Halfmann">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <!-- blueimp-Gallery -->
+    <link rel="stylesheet" href="libs/blueimp-gallery/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-image-gallery/bootstrap-image-gallery.css">
     <!-- Custom Style -->
     <link rel="stylesheet" href="stylesheets/style.css">
-    <!-- blueimp-Gallery -->
-    <link rel="stylesheet" href="stylesheets/blueimp-gallery.min.css">
-    <link rel="stylesheet" href="stylesheets/bootstrap-image-gallery.css">
 </head>
 
 <body>
@@ -22,17 +22,15 @@
     <br />
     <!-- Logo -->
     <div class="row">
-        <div class="col-xs-0 col-sm-0 col-md-3"></div>
-        <div class="col-xs-9 col-sm-6 col-md-4">
-            <a href="/">
-                <img src="images/PM_Logo_Standard_grid.png" alt="Logo" class="img-responsive"> <br /><br />
-            </a>
+        <div class="col-xs-0 col-sm-2 col-md-3 col-lg-3"></div>
+        <div class="col-xs-10 col-sm-6 col-md-4">
+            <img src="images/PM_Logo_Standard_grid.png" alt="Logo" class="img-responsive"> <br /><br />
         </div>
     </div>
     <!-- Content -->
     <div class="row">
-        <div class="col-xs-0 col-sm-0 col-md-3"></div>
-        <div class="col-xs-12 col-sm-12 col-md-6">
+        <div class="col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
             <div class="jumbotron" id="jumbotron">
                 <!-- Dialog Text -->
                 <p id="greeterHeading"></p>
@@ -41,7 +39,7 @@
             <form method="post"  id="formSessionId">
                 <div class="form-group">
                     <label for="inputSessionId"></label>
-                    <input type="number"
+                    <input type="text"
                            class="form-control"
                            id="inputSessionId"
                            name="sessionID"
@@ -50,32 +48,45 @@
                 </div>
                 <!-- Button OK -->
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary" id="buttonRequestSessionID">OK</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="buttonRequestSessionID">OK</button>
                 </div>
             </form>
             <!-- Button Pictures & Videos -->
             <div id="pickButton">
                 <a id="pictures" class="btn btn-primary btn-lg btn-block" role="button"><strong>Bilder</strong></a>
-                <a id="videos" class="btn btn-primary btn-lg btn-block" role="button"><strong>Slideshow</strong></a>
+                <!--<a id="videos" class="btn btn-primary btn-lg btn-block" role="button"><strong>Slideshow</strong></a>-->
+                <a id="idBack" class="btn btn-primary btn-lg btn-block" role="button"><strong>Session ID eingeben</strong></a>
+
             </div>
             <!-- Button Borderless & Fullscreen -->
-            <div class="hidden-xs">
-                <div class="btn-group" data-toggle="buttons" id="galleryButton">
-                    <label class="btn btn-primary btn-lg">
-                        <i class="glyphicon glyphicon-new-window"></i>
-                        <input id="borderless-checkbox" type="checkbox"> Borderless
-                    </label>
-                    <label class="btn btn-primary btn-lg">
-                        <i class="glyphicon glyphicon-fullscreen"></i>
-                        <input id="fullscreen-checkbox" type="checkbox"> Fullscreen
-                    </label>
-                </div>
+
+            <div class="btn-group" data-toggle="buttons" id="galleryButton">
+                <label class="btn btn-primary btn-lg">
+                    <i class="glyphicon glyphicon-new-window"></i>
+                    <input id="borderless-checkbox" type="checkbox" checked="checked"> Borderless
+                </label>
+                <label class="btn btn-primary btn-lg">
+                    <i class="glyphicon glyphicon-fullscreen"></i>
+                    <input id="fullscreen-checkbox" type="checkbox"> Fullscreen
+                </label>
             </div>
+
+            <!-- Ladebalken -->
+            <!--<p id="eventText"></p>-->
+
             <!-- Gallery -->
             <div class="row">
                 <br />
                 <p id="sessionData"></p>
             </div>
+
+            <!-- Slideshow -->
+            <!--
+            <div class="row">
+                <p id="seesionDataSlideShow"></p>
+            </div>
+           -->
+
             <!-- Button Back -->
             <br />
             <div id="backButton">
@@ -85,25 +96,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Page 4 - Video -->
-    <!-- <div id="page4">
-         <div class="row">
-             <div class="col-xs-0 col-sm-0 col-md-3"></div>
-             <div class="col-xs-12 col-sm-12 col-md-6">
-                 <div class="embed-responsive embed-responsive-16by9">
-                     <iframe class="embed-responsive-item" src="clips/In-Studio.mp4"></iframe>
-                 </div>
-                 <br />
-                 <div id="back_button_page4">
-                     <a class="btn btn-primary" role="button">
-                         <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                     </a>
-                 </div>
-             </div>
-         </div>
-     </div> <!-- /page4 -->
 
     <!-- Modal -->
     <div id="blueimp-gallery" class="blueimp-gallery">
@@ -146,9 +138,8 @@
 <script src="libs/jquery/dist/jquery.min.js"></script>
 <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- blueimp-gallery -->
-<script src="javascripts/jquery.blueimp-gallery.min.js"></script>
-<script src="javascripts/bootstrap-image-gallery.min.js"></script>
-<script src="javascripts/custom_gallery.js"></script>
+<script src="libs/blueimp-gallery/jquery.blueimp-gallery.min.js"></script>
+<script src="libs/bootstrap-image-gallery/bootstrap-image-gallery.min.js"></script>
 <!-- custom scripts -->
 <script src="javascripts/app.js"></script>
 

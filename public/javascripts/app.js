@@ -1,31 +1,53 @@
 /**
- * Created by christianhalfmann on 01.07.15.
+ * View Controller
+ * @author Christian Halfmann
+ * @version 07 JUL 2015
  */
 
 (function() {
-
+    // Variable to detect mobile devices
+    var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+    };
 
     // Start Condition
     $(document).ready(function(){
 
-        $('#greeterHeading').text('Willkommen bei Picture Moments! Hier hast Du die Möglichkeit Bilder' +
+        $('#greeterHeading').html('Willkommen bei Picture Moments!<br/>Hier hast Du die Möglichkeit Bilder' +
             ' Deiner Foto-Session Online zu betrachten. Bitte gib dafür Deine Session-ID ein.');
-
         $('#pickButton').hide();
         $('#galleryButton').hide();
         $('#backButton').hide();
-
         $('#buttonRequestSessionID').on('click', requestSession);
         $('form').on('submit', function(evt){
             evt.preventDefault();
+
         });
     });
 
+    // Communication between WebClient and WebServer
     function requestSession(evt) {
 
         var id = $('#inputSessionId').val();
         if (id !== '') {
-            $('#buttonRequestSessionID').html('<img src="/images/loading.gif" width="100" height="67"> loading...');
+            //$('#eventText').html('<img src="images/loading.gif"> loading...');
             var jqxhr = $.ajax('/api/sessions/' + id)
                 .done(function() {
                     //alert('done');
@@ -51,44 +73,47 @@
         }
     }
 
+    // Processes Session Data for index.html
     function appendSessionView(sessionData) {
-        //alert('Bingo!');
         var imagesHTML = '';
         sessionData.images.forEach(function(image) {
 
-        var link = '<div class="col-xs-6 col-md-3"><a href="/api/images/'
-            + image + '" class="thumbnail" data-gallery>';
-
+            var link = '<div class="col-xs-6 col-sm-5 col-md-4 col-lg-3"><a href="/api/images/' + image + '" class="thumbnail" data-gallery>';
             link += '<img src="/api/thumbnails/'
-                + image + '" class="img-responsive" width="200" height="200" alt="'
-                + image + '" /></a>';
+                + image + '" class="img-responsive" width="" height="" alt="' + image + '" /></a>';
 
             link += '</div>';
             imagesHTML += link;
+
         });
 
         var name = sessionData.client.firstname + ' '
             + sessionData.client.lastname;
 
-
-        $('#greeterHeading')
-            .css({"color": "#8D9091"})
-            .html('Hallo '
-                + name
-                + '. Die Bilder Deiner Session liegen hier bereit. '
-                + 'Du kannst Dich durch alle Bilder durchklicken '
-                + 'oder sie als Slideshow betrachten. Viel Spaß!');
+        $('#greeterHeading').css({"color": "#8D9091"}).html('Hallo ' + name + '!<br/> Die Bilder Deiner Session liegen hier bereit. ' +
+            'Du kannst Dich durch alle Bilder durchklicken und sie online betrachten. Viel Spaß!');
 
         hideSessionInput();
-        showButtons();
+        showPickButton();
 
         $('#pictures').click(function(){
-            $('#jumbotron').hide();
-            $('#pickButton').hide();
-            $('#galleryButton').show();
-            $('#sessionData').html(imagesHTML);
-            $('#sessionData').show();
-            $('#backButton').show();
+            if(isMobile.any()) {
+                $('#jumbotron').hide();
+                $('#pickButton').hide();
+                $('#sessionData').html(imagesHTML).show();
+                $('.thumbnail').css({"width": "80px", "height": "80px"}); // wird nur auf das erste Element angewendet :-(
+                $('#backButton').show();
+            } else {
+                $('#jumbotron').hide();
+                $('#pickButton').hide();
+                $('#galleryButton').show();
+                $('#sessionData').html(imagesHTML).show();
+                $('#backButton').show();
+            }
+        });
+
+        $('#idBack').click(function(){
+            location.reload();
         });
     }
 
@@ -104,8 +129,33 @@
         $('#formSessionId').hide();
     }
 
-    function showButtons() {
+    function showPickButton() {
         $('#pickButton').show();
     }
 
+    // Gallery view for mobile and desktop devices
+    if(isMobile.any()) {
+        // Fullscreen and borderless gallery view for mobile devices
+        $('#borderless-checkbox').prop('checked', function () {
+            var borderless = $(this).is(':checked');
+            $('#blueimp-gallery').data('useBootstrapModal', !borderless);
+            $('#blueimp-gallery').toggleClass('blueimp-gallery-controls', borderless);
+        });
+
+        $('#fullscreen-checkbox').prop('checked', function () {
+            $('#blueimp-gallery').data('fullScreen', $(this).is(':checked'));
+        });
+
+    }else {
+        // Initial Lightbox view for desktop devices
+        $('#borderless-checkbox').on('change', function () {
+            var borderless = $(this).is(':checked');
+            $('#blueimp-gallery').data('useBootstrapModal', !borderless);
+            $('#blueimp-gallery').toggleClass('blueimp-gallery-controls', borderless);
+        });
+
+        $('#fullscreen-checkbox').on('change', function () {
+            $('#blueimp-gallery').data('fullScreen', $(this).is(':checked'));
+        });
+    }
 })();

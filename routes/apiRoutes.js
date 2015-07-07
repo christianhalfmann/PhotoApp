@@ -2,7 +2,7 @@
  * Controllers for requests to /api/...
  *
  * @author Andreas Willems
- * @version 06 JUL 2015
+ * @version 07 JUL 2015
  */
 
 var http = require('http');
@@ -28,9 +28,12 @@ router.get('/images/:id', function getImageById(req, res) {
     reactToRequest(req, res);
 });
 
-/*
+/**
  * Handles requests to the web server by sending HTTP requests to
  * the data server and processing the subsequent HTTP responses.
+ *
+ * @param req - the request that was directed at the web server
+ * @param res - the web server's response object
  */
 var reactToRequest = function(req, res) {
     var id = req.params.id;
@@ -49,8 +52,12 @@ var reactToRequest = function(req, res) {
     }).end();
 };
 
-/*
+/**
  * Processes the responses from the data server and the web server.
+ *
+ * @param dataResponse - the response object from the data server
+ * @param path - the path the client chose, i.e. 'sessions', 'images'
+ * @param webResponse - the web server's response object
  */
 var handleResponse = function(dataResponse, path, webResponse) {
     // check response for error
