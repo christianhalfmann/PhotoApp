@@ -21,6 +21,7 @@ den Webserver stellt und der mit der Rückgabe der Datei \textit{index.html} ant
 In der Abbildung \ref{fig_webserver_webclient} ist weiter vereinfacht dargestellt, wie die weitere Kommunikation zwischen Webclient und Webserver über die im Webclient integrierte AJAX\footnote{AJAX (Asynchronous JavaScript and XML): Konzept zur asynchronen Datenübertragung}-Engine ausgeführt wird.
 \clearpage
 \subsection{Schnittstellen}
+\label{webserver_schnittstellen}
 Der Webserver hält die in der folgende Tabelle \ref{tab_api_routes} dargestellten Schnittstelle bereit, an die der Webclient 
 Anfragen richten kann:
 \begin{table}[h]
@@ -31,11 +32,11 @@ Anfragen richten kann:
 			\hline
 			GET & / & ruft die Datei index.html auf und bewirkt den Start der Anwendung \\
 			\hline
-			GET & /api/sessions/:id & ruft die Session mit gegebenen ID auf \\
+			GET & /api/sessions/:id & ruft die Session mit der gegebenen ID auf \\
 			\hline
-			GET & /api/thumbnails/:id & ruft ein Thumbnail des Bildes mit gegebenen ID ab \\
+			GET & /api/thumbnails/:id & ruft ein Thumbnail des Bildes mit der gegebenen ID ab \\
 			\hline
-			GET & /api/images/:id & ruft ein Bild mit gegebenen ID ab \\
+			GET & /api/images/:id & ruft ein Bild mit der gegebenen ID ab \\
 			\hline
 		\end{tabularx}
 		\caption{Die zu realisierende Schnittstelle}
@@ -71,7 +72,7 @@ Die Datei \textit{config.js} enthält die URL und Ports der beteiligten Server.
 In der Datei \textit{app.js} sind die Befehle zur Erzeugung des Web-Servers enthalten. Weiter werden in dieser Datei die übrigen Dateien und die Routen importiert. In Listing \ref{list_server} ist die Datei auszugsweise vorgestellt.
 
 \begin{figure}[h]
-\begin{lstlisting}[caption={Auszug aus app.js}, label=list_server]
+\begin{lstlisting}[caption={Auszug aus app.js (Webserver)}, label=list_server]
 var express	= require("express"); // import express.js module
 var app		= express(); // initialize app / server
 var indexRoutes = require("'./routes/index"); // import routes
