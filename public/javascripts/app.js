@@ -93,6 +93,7 @@
         sessionData.videos.forEach(function(video) {
             var videoTag = '<video width="480" height="320" controls>';
             videoTag += '<source src="/api/videos/' + video + '" type="video/webm" />';
+            videoTag += '<source src="/api/videos/' + video + '" type="video/mp4" />';
             videoTag += '</video>';
             videosHTML += videoTag;
         });

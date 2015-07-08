@@ -90,6 +90,7 @@ var handleResponse = function(dataResponse, path, webResponse) {
 
     dataResponse.on('end', function() {
         if (path == 'sessions') {
+            console.log(resData);
             webResponse.json(JSON.parse(resData));
         } else {
             webResponse.end(resData, 'binary');
