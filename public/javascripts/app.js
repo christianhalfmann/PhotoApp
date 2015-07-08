@@ -152,6 +152,7 @@
         $('#galleryButton').hide();
         $('#backButton').hide();
         $('#sessionData').hide();
+        $('#sessionDataSlideShow').hide();
     });
 
     function hideSessionInput() {
