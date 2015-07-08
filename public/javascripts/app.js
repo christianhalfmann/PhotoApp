@@ -128,13 +128,14 @@
             if(isMobile.any()) {
                 $('#jumbotron').hide();
                 $('#pickButton').hide();
+                $('#galleryButton').hide();
                 $('#sessionDataSlideShow').html(videosHTML).show();
                 //$('.thumbnail').css({"width": "80px", "height": "80px"}); // wird nur auf das erste Element angewendet :-(
                 $('#backButton').show();
             } else {
                 $('#jumbotron').hide();
                 $('#pickButton').hide();
-                $('#galleryButton').show();
+                $('#galleryButton').hide();
                 $('#sessionDataSlideShow').html(videosHTML).show();
                 $('#backButton').show();
             }
