@@ -72,9 +72,9 @@ function IDBHandler(requestMethod) {
             var objectStoreAddRequest = objectStore.add(newData, key);
             objectStoreAddRequest.onsuccess = function(evt) {
                 console.log('Data successfully stored');
-                newData.images.forEach(function(image) {
+                /*newData.images.forEach(function(image) {
                     getThumbnail(image);
-                });
+                });*/
             };
             objectStoreAddRequest.onerror = function(event) {
                 errorHandler('objectStoreAddRequest', event);
@@ -102,7 +102,7 @@ function IDBHandler(requestMethod) {
                 console.log('Image retrieved');
                 blob = xhr.response;
                 console.log('Blob: ' + blob);
-                storeImageInIndexedDB(blob, id);
+                //storeImageInIndexedDB(blob, id);
             }
         }, false);
         // Send XHR
@@ -144,7 +144,7 @@ function IDBHandler(requestMethod) {
         var lastSession;
         var transaction = indexedDb.transaction(["sessionData"], "readonly");
         var objectStore = transaction.objectStore("sessionData");
-        objectStore.openCursor().onsuccess = function(event, callback) {
+        objectStore.openCursor().onsuccess = function(event) {
             var cursor = event.target.result;
             if (cursor) {
                 lastSession = cursor.value;

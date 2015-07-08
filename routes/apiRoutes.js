@@ -23,8 +23,13 @@ router.get('/thumbnails/:id', function getThumnailById(req, res) {
     reactToRequest(req, res);
 });
 
-/* GET request to /api/images/:id. */
+/* GET request to /api/images/:id */
 router.get('/images/:id', function getImageById(req, res) {
+    reactToRequest(req, res);
+});
+
+/* GET request to /api/videos/:id */
+router.get('/videos/:id', function getVideoById(req, res) {
     reactToRequest(req, res);
 });
 
@@ -38,7 +43,7 @@ router.get('/images/:id', function getImageById(req, res) {
 var reactToRequest = function(req, res) {
     var id = req.params.id;
     var path = req.url.split('/')[1];
-    var acceptType = (path == 'sessions') ? 'application/json' : 'image/*';
+    var acceptType = getAcceptedType(path);
     var options = {
         host: serverData.host,
         port: serverData.port,
@@ -90,6 +95,34 @@ var handleResponse = function(dataResponse, path, webResponse) {
             webResponse.end(resData, 'binary');
         }
     });
+};
+
+/**
+ * Determines the accepted mime type that will be set in the request header.
+ * @param path - the path responsible for the decision
+ * @returns {string}
+ */
+var getAcceptedType = function(path) {
+    var acceptedType = '';
+    switch (path) {
+        case 'sessions': {
+            acceptedType = 'application/json';
+            break;
+        }
+        case 'images': {
+            acceptedType = 'image/*';
+            break;
+        }
+        case 'thumbnails': {
+            acceptedType = 'image/*';
+            break;
+        }
+        case 'videos': {
+            acceptedType = 'video/webm';
+            break;
+        }
+    }
+    return acceptedType;
 };
 
 module.exports = router;

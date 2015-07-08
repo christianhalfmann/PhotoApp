@@ -78,6 +78,7 @@
     // Processes Session Data for index.html
     function appendSessionView(sessionData) {
         var imagesHTML = '';
+        var videosHTML = '';
         sessionData.images.forEach(function(image) {
 
             var link = '<div class="col-xs-6 col-sm-5 col-md-4 col-lg-3"><a href="/api/images/' + image + '" class="thumbnail" data-gallery>';
@@ -87,6 +88,13 @@
             link += '</div>';
             imagesHTML += link;
 
+        });
+
+        sessionData.videos.forEach(function(video) {
+            var videoTag = '<video width="480" height="320" controls>';
+            videoTag += '<source src="/api/videos/' + video + '" type="video/webm" />';
+            videoTag += '</video>';
+            videosHTML += videoTag;
         });
 
         var name = sessionData.client.firstname + ' '
@@ -110,6 +118,23 @@
                 $('#pickButton').hide();
                 $('#galleryButton').show();
                 $('#sessionData').html(imagesHTML).show();
+                //$('#videoData').html(videosHTML).show();
+                $('#backButton').show();
+            }
+        });
+
+        $('#videos').click(function() {
+            if(isMobile.any()) {
+                $('#jumbotron').hide();
+                $('#pickButton').hide();
+                $('#sessionDataSlideShow').html(videosHTML).show();
+                //$('.thumbnail').css({"width": "80px", "height": "80px"}); // wird nur auf das erste Element angewendet :-(
+                $('#backButton').show();
+            } else {
+                $('#jumbotron').hide();
+                $('#pickButton').hide();
+                $('#galleryButton').show();
+                $('#sessionDataSlideShow').html(videosHTML).show();
                 $('#backButton').show();
             }
         });
