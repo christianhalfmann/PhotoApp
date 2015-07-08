@@ -1,5 +1,5 @@
 \clearpage
-\section{Lessons learned}
+\section{Lessons learned (AW)}
 Im Folgenden werden einige Punkte genannt, die während der Realisierung Probleme bereitet haben:
 \begin{itemize}
 	\item Die Speicherung von Binärdaten, die über einen Browser an den Server geschickt werden,
@@ -9,4 +9,6 @@ Im Folgenden werden einige Punkte genannt, die während der Realisierung Problem
 	\item Insbesondere bei Responses ist auf die korrekte Anwendung von HTTP und die Manipulation von Headern zu achten.
 	\item MongoDB behandelt zu speichernde Objekte / Dokumente bis zu 16 MB gleich. Größere Objekte
 	müssen unter Anwendung des sog. GridFS gespeichert werden.
+	\item Der Wiedergabe von Videos hängt sehr stark vom verwendeten Browser und dem Betriebssystem
+	ab. Für eine breite Kompatibilität der Anwendung ist einiger Aufwand diesbezüglich nötig.
 \end{itemize}

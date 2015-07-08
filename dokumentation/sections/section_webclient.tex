@@ -1,5 +1,5 @@
 \clearpage
-\section{Webclient (CH)}
+\section{Webclient (CH/AW)}
 \label{section_webclient}
 Der Webclient ist die Schnittstelle zwischen Nutzer und Anwendung. Nach Aufruf der Applikation wird der Nutzer aufgefordert seine Session-ID einzugeben. Ist diese gültig, gelangt er in seinen persönlichen Bereich. Dort wird er mit seinem Namen begrüßt und kann die Bilder aus seiner Fotosession betrachten. 
 
@@ -32,11 +32,13 @@ Der Webclient hält folgende Schnittstellen bereit:
 			\hline
 			GET & / & ruft die Datei index.html auf und bewirkt den Start der Anwendung \\
 			\hline
-			GET & /api/sessions/:id & ruft die Session mit gegebenen ID auf \\
+			GET & /api/sessions/:id & ruft die Session mit der gegebenen ID auf \\
 			\hline
-			GET & /api/thumbnails/:id & ruft ein Thumbnail des Bildes mit gegebenen ID ab \\
+			GET & /api/thumbnails/:id & ruft ein Thumbnail des Bildes mit der gegebenen ID ab \\
 			\hline
-			GET & /api/images/:id & ruft ein Bild mit gegebenen ID ab \\
+			GET & /api/images/:id & ruft ein Bild mit der gegebenen ID ab \\
+			\hline
+			GET & /api/videos/:id & ruft ein Video mit der gegebenen ID ab \\
 			\hline
 		\end{tabularx}
 		\caption{Die zu realisierende Schnittstelle}
@@ -49,7 +51,7 @@ Mit der Eingabe der URL wird zunächst ein GET Request an den Webserver gestellt
 Die weitere Kommunikation zwischen Client und Webserver verläuft über die im Webclient integrierte AJAX-Engine. Der Client stellt einen GET Request und bekommt die entsprechende Antwort in Form eines JSON Strings oder als Binärdaten zurück (Siehe dazu auch Abschnitt \ref{webserver_schnittstellen} und Abbildung \ref{fig_webserver_webclient})
 
 \subsection{Realisierung}
-Der Webclient basiert auf einer Single-Page Anwendung und wurde mittels der Grundelemente HTML (\textit{index.html}), CSS (\textit{style.css}), JavaScript (\textit{app.js}) implementiert. 
+Der Webclient basiert auf einer Single-Page Anwendung und wurde mittels der Grundelemente HTML (\textit{index.html}), CSS (\textit{style.css}), JavaScript (\textit{app.js} und \textit{IDBHandler.js}) implementiert. 
 
 Neben diesen drei Elementen wurde zur Realisierung der Website das Framework Bootstrap und die JavaScript Bibliothek jQuery genutzt. Außerdem wurde zur Erstellung der Galerie auf die Bootstarp Image Gallery blueimp  zurückgegriffen.
 
@@ -107,7 +109,8 @@ In der Funktion appendSessionView werden die Daten vom Webserver verarbeitet und
 	\end{lstlisting}
 %\end{figure}
 
-Für jedes Bild wird hier in HTML-Syntax eine Div-Box mit den entsprechenden Attributen erstellt. 
+Für jedes Bild wird hier in HTML-Syntax eine Div-Box mit den entsprechenden Attributen erstellt.
+Ebenso wird auch mit Videos verfahren.
 
 %\begin{figure}[h]
 	\begin{lstlisting}[caption={Auszug aus app.js (Webclient)}, label=list_client]
@@ -190,3 +193,6 @@ festgelegt. Im ersten If-Zweig, welchher bei der Nutzung mobiler Geräte aufgeru
 wird, werden durch prop() die Checkboxen, welche zur Auswahl der Darstellung 
 dienen, initial als checkt gesetzt und somit die Darstellung auf Borderless/Fullscreen 
 gesetzt.
+
+Die Datei \textit{IDBHandler.js} sorgt dafür, dass beim Laden einer Session die ID der Sitzung in der IndexedDB des Clients gespeichert. Beim nächsten Aufruf der Seite wird,
+sofern die Speicherung noch vorhanden ist, die zuletzt aufgerufene Session automatisch geladen.
